@@ -1,0 +1,34 @@
+---
+- hosts: all
+  become: yes
+
+  roles:
+    - common
+
+
+- hosts: monitor
+  become: yes
+
+  roles:
+    - monitor
+
+
+
+- hosts: primary
+  become: yes
+
+  roles:
+    - primary
+
+
+
+
+
+- hosts: standby
+  become: yes
+  serial: 1
+
+
+  roles:
+    - standby
+

@@ -1,0 +1,3 @@
+postgres_pgdata: /var/lib/postgresql/17/data
+
+node_role: primary

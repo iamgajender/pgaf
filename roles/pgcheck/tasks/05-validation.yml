@@ -1,0 +1,42 @@
+---
+###############################################################################
+# Verify service
+###############################################################################
+
+- name: Gather service facts
+  service_facts:
+
+- name: Validate service
+  assert:
+    that:
+      - "'pgcheck.service' in ansible_facts.services"
+      - ansible_facts.services['pgcheck.service'].state == "running"
+
+###############################################################################
+# Verify Port
+###############################################################################
+
+- name: Verify port 8008
+  shell: |
+    ss -lnt | grep ":{{ pgcheck_port }}"
+  register: port_check
+  changed_when: false
+
+- assert:
+    that:
+      - port_check.rc == 0
+
+###############################################################################
+# Verify API
+###############################################################################
+
+- name: Verify HTTP endpoint
+  uri:
+    url: "http://127.0.0.1:{{ pgcheck_port }}"
+    status_code:
+      - 200
+      - 503
+  register: api
+
+- debug:
+    msg: "Health API returned HTTP {{ api.status }}"

@@ -1,0 +1,12 @@
+---
+pgcheck_port: 8008
+
+pgcheck_script: /usr/local/bin/pg_check.py
+
+pgcheck_service: pgcheck
+
+postgres_bin_dir: "/usr/lib/postgresql/{{ postgres_version }}/bin"
+
+postgres_pgdata: "/var/lib/postgresql/{{ postgres_version }}/data"
+
+postgres_user: postgres

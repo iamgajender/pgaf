@@ -1,0 +1,6 @@
+# deploye the pgcheck_script over theere  the complete cluster
+- hosts: primary:standby
+  become: yes
+  roles:
+    - pgcheck
+

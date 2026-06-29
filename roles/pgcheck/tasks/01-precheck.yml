@@ -21,7 +21,7 @@
 
 - name: Verify PostgreSQL binaries
   stat:
-    path: "{{ postgres_bin_dir }}/psql"
+    path: "{{ postgresql_bin_dir }}/psql"
   register: postgres_bin
 
 - name: Validate PostgreSQL binaries

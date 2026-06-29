@@ -3,10 +3,8 @@ pgcheck_port: 8008
 
 pgcheck_script: /usr/local/bin/pg_check.py
 
-pgcheck_service: pgcheck
+pgcheck_service: pgcheck.service
 
-postgres_bin_dir: "/usr/lib/postgresql/{{ postgres_version }}/bin"
-
-postgres_pgdata: "/var/lib/postgresql/{{ postgres_version }}/data"
+postgres_pgdata: "/var/lib/postgresql/17/data"
 
 postgres_user: postgres

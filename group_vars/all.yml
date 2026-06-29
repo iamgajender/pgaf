@@ -6,6 +6,9 @@ pg_ctl_path: "/usr/lib/postgresql/17/bin/pg_ctl"
 
 psql_path: "/usr/lib/postgresql/17/bin/psql"
 
+monitor_pgdata: /var/lib/postgresql/17/monitor
+
+postgres_pgdata: /var/lib/postgresql/17/data
 
 
 # group_vars/all.yml

@@ -1,81 +1,36 @@
 ---
 ###############################################################################
-# Common Configuration
+# PgBouncer Installation
 ###############################################################################
 
-- hosts: all
-  become: yes
-
-  roles:
-    - common
+- import_tasks: 01-install.yml
 
 ###############################################################################
-# Monitor Setup
+# PgBouncer Configuration
 ###############################################################################
 
-- hosts: monitor
-  become: yes
-
-  roles:
-    - monitor
+- import_tasks: 02-configure.yml
 
 ###############################################################################
-# Primary Setup
+# PgBouncer Authentication
 ###############################################################################
 
-- hosts: primary
-  become: yes
-
-  roles:
-    - primary
+- import_tasks: 03-auth.yml
 
 ###############################################################################
-# Standby Setup
+# PgBouncer Service
 ###############################################################################
 
-- hosts: standby
-  become: yes
-  serial: 1
-
-  roles:
-    - standby
+- import_tasks: 04-service.yml
 
 ###############################################################################
-# Deploy pgcheck Service
+# PgBouncer Validation
 ###############################################################################
 
-- hosts: primary:standby
-  become: yes
-
-  roles:
-    - pgcheck
+- import_tasks: 05-validation.yml
 
 ###############################################################################
-# Deploy HAProxy
+# PgBouncer Summary
 ###############################################################################
 
-- hosts: haproxy
-  become: yes
-
-  roles:
-    - haproxy
-
-###############################################################################
-# Deploy PgBouncer
-###############################################################################
-
-- hosts: pgbouncer
-  become: yes
-
-  roles:
-    - pgbouncer
-
-###############################################################################
-# Validate Complete Cluster
-###############################################################################
-
-- hosts: monitor
-  become: yes
-
-  roles:
-    - validation
+- import_tasks: 06-show-status.yml

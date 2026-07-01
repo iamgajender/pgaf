@@ -1,0 +1,49 @@
+---
+###############################################################################
+# Update Package Cache
+###############################################################################
+
+- name: Update apt package cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+###############################################################################
+# Install PgBouncer
+###############################################################################
+
+- name: Install PgBouncer package
+  apt:
+    name: pgbouncer
+    state: present
+
+###############################################################################
+# Verify PgBouncer Binary
+###############################################################################
+
+- name: Check PgBouncer binary
+  stat:
+    path: /usr/sbin/pgbouncer
+  register: pgbouncer_binary
+
+- name: Validate PgBouncer installation
+  assert:
+    that:
+      - pgbouncer_binary.stat.exists
+    fail_msg: "PgBouncer installation failed."
+    success_msg: "PgBouncer installed successfully."
+
+###############################################################################
+# Display Installed Version
+###############################################################################
+
+- name: Get PgBouncer version
+  command: pgbouncer -V
+  register: pgbouncer_version
+  changed_when: false
+
+- name: Display PgBouncer version
+  debug:
+    msg:
+      - "PgBouncer Version"
+      - "{{ pgbouncer_version.stdout }}"

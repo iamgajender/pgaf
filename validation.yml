@@ -1,5 +1,0 @@
-# Validate the complete cluster
-- hosts: monitor
-  become: yes
-  roles:
-    - validation

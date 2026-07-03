@@ -17,6 +17,7 @@ monitor_ip: "{{ groups['monitor'][0] }}"
 primary_ip: "{{ groups['primary'][0] }}"
 standby1_ip: "{{ groups['standby'][0] }}"
 standby2_ip: "{{ groups['standby'][1] }}"
+pgbouncer_ip: "{{ groups['pgbouncer'][0] }}"
 
 
 

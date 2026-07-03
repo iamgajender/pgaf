@@ -25,7 +25,7 @@
 - name: Wait for PgBouncer to listen
   wait_for:
     host: 127.0.0.1
-    port: "{{ pgbouncer_listen_port }}"
+    port: "{{ pgbouncer_port }}"
     timeout: 60
 
 ###############################################################################
@@ -56,4 +56,4 @@
     msg:
       - "Service : pgbouncer"
       - "Status  : {{ ansible_facts.services['pgbouncer.service'].state }}"
-      - "Port    : {{ pgbouncer_listen_port }}"
+      - "Port    : {{ pgbouncer_port }}"

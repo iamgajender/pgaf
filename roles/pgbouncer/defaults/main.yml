@@ -106,5 +106,9 @@ pgbouncer_stats_users: postgres
 pgbouncer_ignore_startup_parameters: extra_float_digits
 
 
-pgbouncer_user: pgbouncer
-pgbouncer_group: pgbouncer
+pgbouncer_user: postgres
+pgbouncer_group: postgres
+
+
+
+postgres_scram_password: postgres@123

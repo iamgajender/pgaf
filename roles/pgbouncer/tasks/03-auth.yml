@@ -39,8 +39,8 @@
   template:
     src: pg_hba.conf.j2
     dest: "{{ pgbouncer_hba }}"
-    owner: pgbouncer
-    group: pgbouncer
+    owner: postgres
+    group: postgres
     mode: "0644"
 
 ###############################################################################
@@ -51,8 +51,8 @@
   template:
     src: userlist.txt.j2
     dest: "{{ pgbouncer_userlist }}"
-    owner: pgbouncer
-    group: pgbouncer
+    owner: postgres
+    group: postgres
     mode: "0600"
 
 ###############################################################################

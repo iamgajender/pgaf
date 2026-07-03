@@ -10,7 +10,7 @@
       - "              PgBouncer Validation Summary               "
       - "========================================================="
       - "Service           : {{ ansible_facts.services['pgbouncer.service'].state | capitalize }}"
-      - "Listening Port    : {{ pgbouncer_listen_port }}"
+      - "Listening Port    : {{ pgbouncer_port }}"
       - "HAProxy           : Reachable"
       - "Primary IP        : {{ primary_ip.stdout }}"
       - "Pooling           : Healthy"

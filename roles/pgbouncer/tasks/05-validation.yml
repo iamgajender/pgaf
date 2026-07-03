@@ -20,7 +20,7 @@
 
 - name: Verify PgBouncer port
   shell: |
-    ss -lnt | grep ":{{ pgbouncer_listen_port }}"
+    ss -lnt | grep ":{{ pgbouncer_port }}"
   register: pgbouncer_port_status
   changed_when: false
 
@@ -28,8 +28,8 @@
   assert:
     that:
       - pgbouncer_port_status.rc == 0
-    fail_msg: "PgBouncer is not listening on port {{ pgbouncer_listen_port }}."
-    success_msg: "PgBouncer is listening on port {{ pgbouncer_listen_port }}."
+    fail_msg: "PgBouncer is not listening on port {{ pgbouncer_port }}."
+    success_msg: "PgBouncer is listening on port {{ pgbouncer_port }}."
 
 ###############################################################################
 # Verify Basic Connectivity
@@ -40,7 +40,7 @@
   shell: |
     psql \
       -h 127.0.0.1 \
-      -p {{ pgbouncer_listen_port }} \
+      -p {{ pgbouncer_port }} \
       -d postgres \
       -Atqc "SELECT 1;"
   register: pgbouncer_connectivity
@@ -63,7 +63,7 @@
   shell: |
     psql \
       -h 127.0.0.1 \
-      -p {{ pgbouncer_listen_port }} \
+      -p {{ pgbouncer_port }} \
       -d postgres \
       -Atqc "SELECT pg_is_in_recovery();"
   register: recovery_status
@@ -85,7 +85,7 @@
   shell: |
     psql \
       -h 127.0.0.1 \
-      -p {{ pgbouncer_listen_port }} \
+      -p {{ pgbouncer_port }} \
       -d postgres \
       -Atqc "SELECT inet_server_addr();"
   register: primary_ip
@@ -105,7 +105,7 @@
   shell: |
     psql \
       -h 127.0.0.1 \
-      -p {{ pgbouncer_listen_port }} \
+      -p {{ pgbouncer_port }} \
       pgbouncer \
       -Atqc "SHOW POOLS;"
   register: pools
@@ -123,7 +123,7 @@
   shell: |
     psql \
       -h 127.0.0.1 \
-      -p {{ pgbouncer_listen_port }} \
+      -p {{ pgbouncer_port }} \
       pgbouncer \
       -Atqc "SHOW SERVERS;"
   register: servers
@@ -141,7 +141,7 @@
   shell: |
     psql \
       -h 127.0.0.1 \
-      -p {{ pgbouncer_listen_port }} \
+      -p {{ pgbouncer_port }} \
       pgbouncer \
       -Atqc "SHOW CLIENTS;"
   register: clients
@@ -159,7 +159,7 @@
   shell: |
     psql \
       -h 127.0.0.1 \
-      -p {{ pgbouncer_listen_port }} \
+      -p {{ pgbouncer_port }} \
       pgbouncer \
       -Atqc "SHOW DATABASES;"
   register: databases
@@ -176,7 +176,7 @@
   debug:
     msg:
       - "PgBouncer Service : Running"
-      - "Listening Port    : {{ pgbouncer_listen_port }}"
+      - "Listening Port    : {{ pgbouncer_port }}"
       - "Current Primary   : {{ primary_ip.stdout }}"
       - "Routing           : Verified"
       - "Pooling           : Healthy"
